@@ -1,8 +1,8 @@
 {
   "name": "skw",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "game frame",
-  "main": "index.js",
+  "main": "dist/skw.js",
   "scripts": {
     "build":"webpack --config webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"

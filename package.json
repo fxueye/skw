@@ -1,10 +1,11 @@
 {
   "name": "skw",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "game frame",
   "main": "dist/skw.js",
   "scripts": {
-    "build":"webpack --config webpack.config.js",
+    "build-min":"webpack",
+    "build":"webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "skw <281431280@qq.com>",

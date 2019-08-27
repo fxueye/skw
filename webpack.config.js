@@ -1,9 +1,5 @@
 var path = require('path');
-
-var ENV = process.env.npm_lifecycle_event;
-
-if(ENV === 'build'){
-    config = {
+config = {
         entry: {
             'skw': './src/index.js'
         },
@@ -28,11 +24,8 @@ if(ENV === 'build'){
             ]
         },
         resolve: {
-            extensions: ['js'],
+            // extensions: ['js'],
           }
-    };
-
-}
-
+};
 
 module.exports = config;

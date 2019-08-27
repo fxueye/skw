@@ -17,13 +17,19 @@ if(ENV === 'build'){
             loaders: [
                 {
                     loader: 'babel-loader',
+                    include: [
+                        path.resolve(__dirname, "src")
+                    ],
                     test: path.join(__dirname, 'src'),
                     query: {
                         presets: 'env'
                     },
                 }
             ]
-        }
+        },
+        resolve: {
+            extensions: ['js'],
+          }
     };
 
 }

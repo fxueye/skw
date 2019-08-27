@@ -77,5 +77,5 @@ class App{
 
 
 }
-const app = new App();
-export default app;
+// const app = new App();
+export default App;

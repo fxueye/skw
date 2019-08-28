@@ -2,14 +2,15 @@
 *Created on 2019年8月20日
 *@author: skw QQ:281431280 
 */
-import cax from 'cax';
-import App from './App';
-class Toast extends cax.Group{
-    constructor(){
+import Group from '../cax/render/display/group'
+import CaxText from '../cax/render/display/text'
+class Toast extends Group{
+    constructor(app){
         super();
+        this._app = app
         this._msg = "";
         this._delay = 5000;
-        this.msgText = new cax.Text("",{
+        this.msgText = new CaxText("",{
             font: '35px Arial',
             color: '#FFFFFF',
             baseline: 'top' 
@@ -39,7 +40,7 @@ class Toast extends cax.Group{
         
         this.width = this.msgText.getWidth() + 60;
         this.height = 75;
-        var rect = new cax.Rect(this.width,this.height,{
+        var rect = new Rect(this.width,this.height,{
             fillStyle: 'black'
         })
         this.x = App.width / 2 - this.width / 2;
@@ -59,14 +60,14 @@ class Toast extends cax.Group{
     }
     
     show(){
-        App.LoadStage.add(this);
+        this._app.LoadStage.add(this);
         this.alpha = 0;
-        cax.To.get(this).to({alpha:1},this._delay / 2,cax.easing.backOut).end(this.hide.bind(this)).start();
+        To.get(this).to({alpha:1},this._delay / 2,easing.backOut).end(this.hide.bind(this)).start();
     }
 
     hide(){
-        cax.To.get(this).to({alpha:0},this._delay / 2,cax.easing.cubicIn).end(()=>{
-            App.LoadStage.remove(this);
+        To.get(this).to({alpha:0},this._delay / 2,easing.cubicIn).end(()=>{
+            this._app.LoadStage.remove(this);
         }).start();
     }
 }

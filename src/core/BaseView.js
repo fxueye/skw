@@ -2,8 +2,9 @@
 *Created on 2019年8月20日
 *@author: skw QQ:281431280 
 */
-import cax from 'cax';
-class BaseView extends cax.Group {
+import Group from '../cax/render/display/group'
+
+class BaseView extends Group {
     constructor(parent){
         super();
         this._parent = parent;

@@ -2,17 +2,18 @@
 *Created on 2019年8月24日
 *@author: skw QQ:281431280 
 */
-import cax from 'cax';
-class Button extends cax.Group{
+import Group from '../cax/render/display/group'
+import CaxText from '../cax/render/display/text'
+class Button extends Group{
     constructor(options){
         super();
         if(options.bgImg){
-            this._bgImg = new cax.Bitmap(options.bgImg);
+            this._bgImg = new Bitmap(options.bgImg);
             this.add(this._bgImg);
 
         }
         if(options.text){
-            this._text = new cax.Text(options.text,{
+            this._text = new CaxText(options.text,{
                 font:options.font,
                 color:options.color
             });

@@ -2,7 +2,9 @@
 *Created on 2019年8月20日
 *@author: skw QQ:281431280 
 */
-import cax from 'cax';
+import Stage from '../cax/render/display/stage'
+import Group from '../cax/render/display/group'
+import {setRafInterval} from '../cax/common/raf-interval'
 import ViewMgr from './ViewMgr';
 import Loader from './Loader';
 import EasyLoading from './EasyLoading';
@@ -13,14 +15,14 @@ class App{
         this._frame = 0;
         
     }
-
+ 
     init(width,height,renderTo){
         this.width = width;
         this.height = height;
-        this._stage = new cax.Stage(width,height,renderTo);
-        this._gameStage = new cax.Group();
-        this._uiStage = new cax.Group();
-        this._loadStage = new cax.Group();
+        this._stage = new Stage(width,height,renderTo);
+        this._gameStage = new Group();
+        this._uiStage = new Group();
+        this._loadStage = new Group();
         this._loader = new Loader();
         
         this._gameStage.width = this.width;
@@ -38,11 +40,11 @@ class App{
         this._viewMgr = new ViewMgr();
         this._scale = document.documentElement.clientWidth/this.width;
         this._stage.scaleEventPoint(this._scale,this._scale);
-        this._easyLoading = new EasyLoading();
+        this._easyLoading = new EasyLoading(this);
         return this;
     }
     start(){
-        this._tickId = cax.tick(this.update.bind(this));
+        this._tickId = setRafInterval(this.update.bind(this),16);
     }
     get ViewMgr(){
         return this._viewMgr;
@@ -77,5 +79,4 @@ class App{
 
 
 }
-// const app = new App();
-export default App;
+export default App

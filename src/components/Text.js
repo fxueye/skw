@@ -2,9 +2,11 @@
 *Created on 2019年8月25日
 *@author: skw QQ:281431280 
 */
-import cax from 'cax';
-import {stringSplit} from '../core/Utils';
-class Text extends cax.Group{
+import Group from '../cax/render/display/group'
+import CaxText from '../cax/render/display/text'
+import Rect from '../cax/render/display/shape/rect'
+import Utils from '../core/Utils';
+class Text extends Group{
     constructor(options){
         super();
         this.font = options.font || "12px Arial";
@@ -12,7 +14,7 @@ class Text extends cax.Group{
         this.color = options.color || "#FFFFFF";
         this.lineHeight = options.lineHeight || "12";
         this.textAlign = options.textAlign || "left";
-        this._caxText = new cax.Text(this._text,{
+        this._caxText = new CaxText(this._text,{
             font:this.font,
             color:this.color
         });
@@ -22,7 +24,7 @@ class Text extends cax.Group{
         this.page = 1;
         this.allPage = 0;
         this.pageNum = 0;
-        this.mask = new cax.Group();
+        this.mask = new Group();
         this.mask.width = this.width;
         this.mask.height = this.height;
         this.on("touchstart",this.touchstart.bind(this));
@@ -56,7 +58,7 @@ class Text extends cax.Group{
 
     refresh(){
         this.allText = [];
-        var rect = new cax.Rect(this.width,this.height,{
+        var rect = new Rect(this.width,this.height,{
             fillStyle: this.bgColor
         })
         this.mask.add(rect);
@@ -64,7 +66,7 @@ class Text extends cax.Group{
         let textHeight = 0;
         const texts = this._text.split('\n');
         texts.forEach((t)=>{ 
-            this._caxText = new cax.Text(t,{
+            this._caxText = new CaxText(t,{
                 font: this.font,
                 color: this.color,
                 textAlign:this.textAlign
@@ -73,9 +75,9 @@ class Text extends cax.Group{
             
             if(textWidth > this.width){
                 const step = Math.round( t.length * this.width / textWidth );
-                const textList = stringSplit(t,step);
+                const textList = Utils.stringSplit(t,step);
                 textList.forEach((text,index)=>{
-                    this._caxText = new cax.Text(text,{
+                    this._caxText = new CaxText(text,{
                         font: this.font,
                         color: this.color,
                         textAlign:this.textAlign

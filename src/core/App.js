@@ -8,6 +8,7 @@ import {setRafInterval} from '../cax/common/raf-interval'
 import ViewMgr from './ViewMgr';
 import Loader from './Loader';
 import EasyLoading from './EasyLoading';
+import Toast from './Toast'
 class App{
 
     constructor(){
@@ -69,6 +70,12 @@ class App{
     }
     hideLoading(){
         this._easyLoading.hide();
+    }
+    Toast(msg,delay = 500){
+        var toast = new Toast(this);
+        toast.msg = msg;
+        toast.delay = delay;
+        return toast;
     }
 
     update(){

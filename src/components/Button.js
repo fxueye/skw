@@ -3,6 +3,7 @@
 *@author: skw QQ:281431280 
 */
 import Group from '../cax/render/display/group'
+import Bitmap from '../cax/render/display/bitmap'
 import CaxText from '../cax/render/display/text'
 class Button extends Group{
     constructor(options){

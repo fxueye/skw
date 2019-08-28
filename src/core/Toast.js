@@ -4,6 +4,8 @@
 */
 import Group from '../cax/render/display/group'
 import CaxText from '../cax/render/display/text'
+import Rect from '../cax/render/display/shape/rect'
+import To from '../cax/common/to'
 class Toast extends Group{
     constructor(app){
         super();
@@ -18,12 +20,6 @@ class Toast extends Group{
         this.init();
     }
     
-    static makeToast(msg,delay = 500){
-        var toast = new Toast();
-        toast.msg = msg;
-        toast.delay = delay;
-        return toast;
-    }
 
 
     init(){
@@ -43,8 +39,8 @@ class Toast extends Group{
         var rect = new Rect(this.width,this.height,{
             fillStyle: 'black'
         })
-        this.x = App.width / 2 - this.width / 2;
-        this.y = App.height / 2 - this.height / 2;
+        this.x = this._app.width / 2 - this.width / 2;
+        this.y = this._app.height / 2 - this.height / 2;
 
         this.msgText.x = this.width / 2 - this.msgText.getWidth() / 2;
         this.msgText.y = this.height / 2 - 35/2;
@@ -62,11 +58,11 @@ class Toast extends Group{
     show(){
         this._app.LoadStage.add(this);
         this.alpha = 0;
-        To.get(this).to({alpha:1},this._delay / 2,easing.backOut).end(this.hide.bind(this)).start();
+        To.get(this).to({alpha:1},this._delay / 2,To.easing.backOut).end(this.hide.bind(this)).start();
     }
 
     hide(){
-        To.get(this).to({alpha:0},this._delay / 2,easing.cubicIn).end(()=>{
+        To.get(this).to({alpha:0},this._delay / 2,To.easing.cubicIn).end(()=>{
             this._app.LoadStage.remove(this);
         }).start();
     }

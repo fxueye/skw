@@ -35,6 +35,10 @@ import EquilateralPolygon from './cax/render/display/shape/equilateral-polygon'
 
 import {setRafInterval, clearRafInterval} from './cax/common/raf-interval'
 
+To.easing = {
+    linear: TWEEN.Easing.Linear.None
+}
+
 const skw = {
     easing: {
         linear: TWEEN.Easing.Linear.None
@@ -47,9 +51,7 @@ const skw = {
     
     App,
     BaseView,
-    EasyLoading,
     Loader,
-    Toast,
     Utils,
     ViewMgr,
     Button,

@@ -12,7 +12,7 @@ class Text extends Group{
         this.font = options.font || "12px Arial";
         this._text = options.text || "";
         this.color = options.color || "#FFFFFF";
-        this.lineHeight = options.lineHeight || "12";
+        this.lineHeight = options.lineHeight || 12;
         this.textAlign = options.textAlign || "left";
         this._caxText = new CaxText(this._text,{
             font:this.font,

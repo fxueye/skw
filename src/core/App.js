@@ -8,13 +8,26 @@ import {setRafInterval} from '../cax/common/raf-interval'
 import ViewMgr from './ViewMgr';
 import Loader from './Loader';
 import EasyLoading from './EasyLoading';
-import Toast from './Toast'
+import Toast from './Toast';
+import EventMgr from './EventMgr'
 class App{
 
     constructor(){
         this._tickId = null;
         this._frame = 0;
-        
+        this._eventMgr = new EventMgr();
+    }
+
+    on (type, listener,thisObject, useCapture) {
+        this._eventMgr.addEventListener(type, listener,thisObject, useCapture)
+    }
+    
+    off (type, listener, useCapture) {
+      this._eventMgr.removeEventListener(type, listener,thisObject, useCapture)
+    }
+    
+    dispatchEvent (evt) {
+        this._eventMgr.dispatchEvent(evt);
     }
  
     init(width,height,renderTo){

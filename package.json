@@ -1,6 +1,6 @@
 {
   "name": "skw",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "game frame",
   "main": "dist/skw.js",
   "scripts": {
@@ -29,7 +29,7 @@
     "type": "git",
     "url": "git+https://github.com/fxueye/skw.git"
   },
-  "bugs": {
+  "bugs": { 
     "url": "https://github.com/fxueye/skw/issues"
   },
   "homepage": "https://github.com/fxueye/skw"

@@ -34,10 +34,13 @@ class EasyLoading extends Group{
         this._loading.y = -this._loading.height / 2;
         this.loading.add(this._loading);
         this.loading.alpha = 0.7;
-        
+        this._delay = 0;
+        this.frame = 0;
     }
 
-    show(){
+    show(delay = 3000){
+        this._delay = delay;
+        this.frame = 0;
         this.timer = setInterval(this._update.bind(this),100);
         this._app.LoadStage.add(this);
     }
@@ -47,6 +50,10 @@ class EasyLoading extends Group{
         this._app.LoadStage.remove(this);
     }
     _update(){
+        this.frame += 100;
+        if(this._delay > 0 && this.frame >= this._delay){
+            this.hide();
+        }
         this.loading.rotation += 20;
     }
 }

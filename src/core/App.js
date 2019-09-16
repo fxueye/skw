@@ -78,13 +78,13 @@ class App{
     get Loader(){
         return this._loader;
     }
-    showLoading(){
-        this._easyLoading.show();
+    showLoading(delay = 3000){
+        this._easyLoading.show(delay);
     }
     hideLoading(){
         this._easyLoading.hide();
     }
-    Toast(msg,delay = 500){
+    Toast(msg,delay = 3000){
         var toast = new Toast(this);
         toast.msg = msg;
         toast.delay = delay;

@@ -1,5 +1,5 @@
 /**
-*Created on 2019年8月20日
+*Created on 2019?8?20?
 *@author: skw QQ:281431280 
 */
 import Stage from '../cax/render/display/stage'
@@ -16,6 +16,7 @@ class App{
         this._tickId = null;
         this._frame = 0;
         this._eventMgr = new EventMgr();
+        this._init = false;
     }
 
     on (type, listener,thisObject, useCapture) {
@@ -55,7 +56,11 @@ class App{
         this._scale = document.documentElement.clientWidth/this.width;
         this._stage.scaleEventPoint(this._scale,this._scale);
         this._easyLoading = new EasyLoading(this);
+        this._init = true;
         return this;
+    }
+    get isInit(){
+        return this._init;
     }
     start(){
         this._tickId = setRafInterval(this.update.bind(this),16);

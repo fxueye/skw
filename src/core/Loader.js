@@ -8,6 +8,7 @@ class Loader{
         this._imgs = {};
         this._progress = null;
         this._complete = null;
+        this._onerror = null;
         this._resBasePath = './';
     }
     /**
@@ -30,11 +31,15 @@ class Loader{
         this._complete = value;
     }
 
+    /**
+     * @param {any} value
+     */
+    set Onerror(value){
+        this._onerror = value;
+    }
+
+
     image(name,path){
-        if(this._imgsTemp[name]){
-            console.error("img name error:" + name)
-            return;
-        }
         this._imgsTemp[name] = path;
     }
 
@@ -63,48 +68,15 @@ class Loader{
                 self._imgsTemp = {};
             },
             onerror:(index)=>{
-                if(self.onerror){
-                    self.onerror(index);
+                if(self._onerror){
+                    self._onerror(index);
                 }
+                self._imgsTemp = {};
             }
           })
           
     }
-    _loading(){
-        self = this;
-        if(this._resBasePath){
-            for(var key in this._imgsTemp){
-                this._imgsTemp[key] = this._resBasePath+'/'+this._imgsTemp[key];
-            }
-        }
-        var keys = Object.keys(this._imgsTemp)
-        var values = Object.values(this._imgsTemp);
-        var len = keys.length;
-        var loaded= 0;
-        while(keys.length > 0){
-            key = keys.pop();
-            value = values.pop();
-            var option = {
-                img:value,
-                complete:(img)=>{
-                    loaded++
-                    var index = keys.indexOf(key);
-                    this._imgs[key] = img;
-                    if(self._progress){
-                        self._progress(loaded/len,loaded,index,this._imgs)
-                    }        
-                    if (loaded === len) {
-                        option.complete && option.complete(this._imgs);
-                    }
-                },
-                fail:()=>{
-                    Loader.loadImg(option)        
-                }
-            }
-            Loader.loadImg(option)
-        }
 
-    }
     static loadImg(option){
         const img = new Image();
         img.crossOrigin=option.crossOrigin || "";
@@ -112,6 +84,7 @@ class Loader{
           option.complete(this);
         }
         img.onerror = function(){
+            console.log("img load error");
             if(option.fail){
                 option.fail();
             }
@@ -142,6 +115,7 @@ class Loader{
             }
           })(index)
           img.src = src;
+          
         })
     }
     static _loadImg(option){

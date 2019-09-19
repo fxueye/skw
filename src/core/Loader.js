@@ -61,15 +61,60 @@ class Loader{
                     self._complete(imgs);
                 }
                 self._imgsTemp = {};
+            },
+            onerror:(index)=>{
+                if(self.onerror){
+                    self.onerror(index);
+                }
             }
           })
           
+    }
+    _loading(){
+        self = this;
+        if(this._resBasePath){
+            for(var key in this._imgsTemp){
+                this._imgsTemp[key] = this._resBasePath+'/'+this._imgsTemp[key];
+            }
+        }
+        var keys = Object.keys(this._imgsTemp)
+        var values = Object.values(this._imgsTemp);
+        var len = keys.length;
+        var loaded= 0;
+        while(keys.length > 0){
+            key = keys.pop();
+            value = values.pop();
+            var option = {
+                img:value,
+                complete:(img)=>{
+                    loaded++
+                    var index = keys.indexOf(key);
+                    this._imgs[key] = img;
+                    if(self._progress){
+                        self._progress(loaded/len,loaded,index,this._imgs)
+                    }        
+                    if (loaded === len) {
+                        option.complete && option.complete(this._imgs);
+                    }
+                },
+                fail:()=>{
+                    Loader.loadImg(option)        
+                }
+            }
+            Loader.loadImg(option)
+        }
+
     }
     static loadImg(option){
         const img = new Image();
         img.crossOrigin=option.crossOrigin || "";
         img.onload = function () {
           option.complete(this);
+        }
+        img.onerror = function(){
+            if(option.fail){
+                option.fail();
+            }
         }
         img.src = option.img;
     }
@@ -91,6 +136,11 @@ class Loader{
               }
             }
           })(index,img)
+          img.onerror =  (function (i) {
+            return function(){
+              option.onerror && option.onerror( i);
+            }
+          })(index)
           img.src = src;
         })
     }
@@ -110,6 +160,11 @@ class Loader{
                 img.src = url;
             }
         })(xhr)
+        xhr.onerror = function(){
+            if(option.fail){
+                option.fail();
+            }
+        }
         xhr.open('GET', option.img, true);
         xhr.responseType = 'blob';
         xhr.send();
@@ -140,6 +195,11 @@ class Loader{
                     img.src = url;
                 }
             })(index,xhr)
+            xhr.onerror =  (function (i) {
+                return function(){
+                  option.onerror && option.onerror( i);
+                }
+              })(index)
             xhr.open('GET', src, true);
             xhr.responseType = 'blob';
             xhr.send();

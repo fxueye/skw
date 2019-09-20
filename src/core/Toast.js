@@ -17,6 +17,7 @@ class Toast extends Group{
             color: '#FFFFFF',
             baseline: 'top' 
         })
+        this._end = null;
         this.init();
     }
     
@@ -54,6 +55,12 @@ class Toast extends Group{
     set delay(value){
         this._delay = value;
     }
+    /**
+     * @param {any} value
+     */
+    set end(value){
+        this._end = value;
+    }
     
     show(){
         this._app.LoadStage.add(this);
@@ -64,6 +71,9 @@ class Toast extends Group{
     hide(){
         To.get(this).to({alpha:0},this._delay / 2,To.easing.cubicIn).end(()=>{
             this._app.LoadStage.remove(this);
+            if(this._end){
+                this._end();
+            }
         }).start();
     }
 }

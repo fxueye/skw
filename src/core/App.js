@@ -89,10 +89,11 @@ class App{
     hideLoading(){
         this._easyLoading.hide();
     }
-    Toast(msg,delay = 3000){
+    Toast(msg,delay = 3000,end = null){
         var toast = new Toast(this);
         toast.msg = msg;
         toast.delay = delay;
+        toast.end = end;
         return toast;
     }
 

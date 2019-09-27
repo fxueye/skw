@@ -97,7 +97,7 @@ class Utils{
 		char_length = 0
 		for (let i = 0; i < str.length; i++) {
 		let son_str = str.charAt(i)
-		encodeURI(son_str).length > 2 ? char_length += 2 : char_length += 1
+		encodeURI(son_str).length > 2 ? char_length += 1 : char_length += 0.5
 		if (char_length >= len || (char_length < len && i === str.length - 1)) {
 			let sub_len = char_length == len ? i + 1 : i
 			arr.push(str.substr(offset, sub_len - offset + ((char_length < len && i === str.length - 1) ? 1 : 0)))

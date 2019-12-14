@@ -104,7 +104,14 @@ class Sprite extends DisplayObject {
       rectLen > 5 && (this.originY = this.rect[3] * this.rect[5])
       if (rectLen > 6) {
         const img = this.option.imgs[this.rect[6]]
-        this.img = typeof img === 'string' ? this.imgMap[img] : img
+        if(typeof img === 'string'){
+          this.img = this.imgMap[img]
+        }else if(img instanceof Bitmap){
+          this.img = img.img
+        }else{
+          this.img = img
+        }
+        // this.img = typeof img === 'string' ? this.imgMap[img] : img   bug  bitmp not 
       }
 
       if (index === len - 1 && (!this.endTime || Date.now() - this.endTime > this.interval)) {

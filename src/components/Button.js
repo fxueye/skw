@@ -20,7 +20,7 @@ class Button extends Group{
             });
         }
         this.add(this._text);
-        this.height = options.width || this._bgImg.height || 100;
+        this.height = options.height || this._bgImg.height || 100;
         this.width = options.width || this._bgImg.width || 200;
     }
     get text(){

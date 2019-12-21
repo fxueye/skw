@@ -61,6 +61,7 @@ class Text extends Group{
     }
 
     refresh(){
+        
         this.allText = [];
         var rect = new Rect(this.width,this.height,{
             fillStyle: this.bgColor

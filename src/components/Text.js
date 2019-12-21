@@ -11,12 +11,12 @@ class Text extends Group{
         super();
         this.font = options.font || "12px Arial";
         this._text = options.text || "";
-        this.color = options.color || "#FFFFFF";
+        this._color = options.color || "#FFFFFF";
         this.lineHeight = options.lineHeight || 12;
         this.textAlign = options.textAlign || "left";
         this._caxText = new CaxText(this._text,{
             font:this.font,
-            color:this.color
+            color:this._color
         });
         this.width = options.width || this._caxText.getWidth();
         this.height = options.height | 0;
@@ -55,6 +55,10 @@ class Text extends Group{
         this._text = value || "";
         this.refresh();
     }
+    set color(value){
+        this._color = value || "#FFF";
+        this.refresh();
+    }
 
     refresh(){
         this.allText = [];
@@ -68,7 +72,7 @@ class Text extends Group{
         texts.forEach((t)=>{ 
             this._caxText = new CaxText(t,{
                 font: this.font,
-                color: this.color,
+                color: this._color,
                 textAlign:this.textAlign
             })
             const textWidth = this._caxText.getWidth();
@@ -79,7 +83,7 @@ class Text extends Group{
                 textList.forEach((text,index)=>{
                     this._caxText = new CaxText(text,{
                         font: this.font,
-                        color: this.color,
+                        color: this._color,
                         textAlign:this.textAlign
                     })
                     if(this.textAlign == "center"){

@@ -43,6 +43,11 @@ class EventDispatcher {
     this.removeEventListener(type, listener, useCapture)
   }
 
+  clearAll(){
+    this._listeners = null
+    this._captureListeners = null
+  }
+
   dispatchEvent (evt) {
       option.stagePropagationStopped[evt.type] = false
 

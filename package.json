@@ -1,6 +1,6 @@
 {
   "name": "skw",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "game frame",
   "main": "dist/skw.js",
   "scripts": {

@@ -15,6 +15,7 @@ class App{
     constructor(){
         this._tickId = null;
         this._frame = 0;
+        this._frameRate = 16;
         this._eventMgr = new EventMgr();
         this._init = false;
     }
@@ -31,9 +32,10 @@ class App{
         this._eventMgr.dispatchEvent(evt);
     }
  
-    init(width,height,renderTo){
+    init(width,height,renderTo,frameRate = 16){
         this.width = width;
         this.height = height;
+        this._frameRate = frameRate;
         this._stage = new Stage(width,height,renderTo);
         this._gameStage = new Group();
         this._uiStage = new Group();
@@ -63,7 +65,7 @@ class App{
         return this._init;
     }
     start(){
-        this._tickId = setRafInterval(this.update.bind(this),16);
+        this._tickId = setRafInterval(this.update.bind(this),this._frameRate);
     }
     get ViewMgr(){
         return this._viewMgr;

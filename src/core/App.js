@@ -67,6 +67,9 @@ class App{
     start(){
         this._tickId = setRafInterval(this.update.bind(this),this._frameRate);
     }
+    stop(){
+        clearRafInterval(this._tickId);
+    }
     get ViewMgr(){
         return this._viewMgr;
     }

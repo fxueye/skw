@@ -56,6 +56,9 @@ class App{
  
         this._viewMgr = new ViewMgr();
         this._scale = document.documentElement.clientWidth/this.width;
+        if(this.width > this.height){
+            this._scale = document.documentElement.clientHeight/this.height;
+        }
         this._stage.scaleEventPoint(this._scale,this._scale);
         this._easyLoading = new EasyLoading(this);
         this._init = true;

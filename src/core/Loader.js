@@ -76,7 +76,39 @@ class Loader{
           })
           
     }
-
+    _loading(){
+        
+        self = this;
+        if(this._resBasePath){
+            for(var key in this._imgsTemp){
+                this._imgsTemp[key] = this._resBasePath+'/'+this._imgsTemp[key];
+            }
+        }
+        var keys = Object.keys(this._imgsTemp)
+        var values = Object.values(this._imgsTemp);
+        Loader._loadImgs({
+            imgs:values,
+            progress:(progress,loaded,index,img)=>{
+                if(self._progress){
+                    self._progress(progress,loaded,index,img)
+                }        
+                self._imgs[keys[index]] = img;
+            },
+            complete:(imgs)=>{
+                if(self._complete){
+                    self._complete(imgs);
+                }
+                self._imgsTemp = {};
+            },
+            onerror:(index)=>{
+                if(self._onerror){
+                    self._onerror(index);
+                }
+                self._imgsTemp = {};
+            }
+          })
+          
+    }
     static loadImg(option){
         const img = new Image();
         img.crossOrigin=option.crossOrigin || "";

@@ -110,7 +110,14 @@ class App{
         this._stage.update();
         this._viewMgr.update();
     }
-
+    
+    reSize(){
+        this._scale = document.documentElement.clientWidth/this.width;
+       if(this.width > this.height){
+           this._scale = document.documentElement.clientHeight/this.height;
+       }
+       this._stage.scaleEventPoint(this._scale,this._scale);
+   }
 
 }
 export default App

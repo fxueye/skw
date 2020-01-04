@@ -6,10 +6,10 @@ import Group from '../cax/render/display/group'
 import CaxText from '../cax/render/display/text'
 import Utils from '../core/Utils';
 class Text extends Group{
-    constructor(options){
+    constructor(text,options){
         super();
+        this._text = text;
         this.font = options.font || "12px Arial";
-        this._text = options.text || "";
         this._color = options.color || "#FFFFFF";
         this.lineHeight = options.lineHeight || 12;
         this.textAlign = options.textAlign || "left";

@@ -6,6 +6,12 @@ import ViewMgr from './core/ViewMgr'
 import Button from './components/Button'
 import Text from './components/Text'
 
+import Banner from './components/Banner'
+import CheckBox from './components/CheckBox'
+import CrlProgress from './components/CrlProgress'
+import ScrollView from './components/ScrollView'
+
+
 import TWEEN from './cax/common/tween'
 import To from './cax/common/to'
 import './cax/common/animate'
@@ -54,6 +60,10 @@ const skw = {
     ViewMgr,
     Button,
     Text,
+    Banner,
+    ScrollView,
+    CrlProgress,
+    Banner,
 
     //cax
     Stage,

@@ -4,7 +4,6 @@
 */
 import Group from '../cax/render/display/group'
 import CaxText from '../cax/render/display/text'
-import Rect from '../cax/render/display/shape/rect'
 import Utils from '../core/Utils';
 class Text extends Group{
     constructor(options){
@@ -20,37 +19,11 @@ class Text extends Group{
         });
         this.width = options.width || this._caxText.getWidth();
         this.height = options.height | 0;
-        this.startPoint = null;
-        this.page = 1;
-        this.allPage = 0;
-        this.pageNum = 0;
-        this.mask = new Group();
-        this.mask.width = this.width;
-        this.mask.height = this.height;
-        this.on("touchstart",this.touchstart.bind(this));
-        this.on("touchend",this.touchend.bind(this));
-        this.bgColor = options.bgColor || '#FFFFFF';
+        
         this.allText = []
         this.refresh();
     }
-    touchstart(e){
-        this.startPoint = {x:e.stageX,y:e.stageY};
-    }
-
-    touchend(e){
-        if(this.startPoint){
-            var len = e.stageY - this.startPoint.y;
-            if(Math.abs(len) > 100){
-                if(len < 0){
-                    this.page= this.page + 1 > this.allPage ? this.allPage : this.page + 1 ;
-                }else{
-                    this.page = this.page - 1 > 1 ? this.page - 1 :1 ;
-                }
-            }
-            this.startPoint= null;
-        }
-        this.reader();
-    }
+  
     set text(value){
         this._text = value || "";
         this.refresh();
@@ -62,12 +35,7 @@ class Text extends Group{
 
     refresh(){
         
-        this.allText = [];
-        var rect = new Rect(this.width,this.height,{
-            fillStyle: this.bgColor
-        })
-        this.mask.add(rect);
-        this.mask.alpha = 0.01;
+    
         let textHeight = 0;
         const texts = this._text.split('\n');
         texts.forEach((t)=>{ 
@@ -109,21 +77,15 @@ class Text extends Group{
         if(this.height == 0){
             this.height = textHeight;
         }
-        this.mask.height = this.height;
-        this.pageNum = Math.floor(this.height / this.lineHeight);
-        this.allPage= Math.ceil(this.allText.length / this.pageNum);
+
        
         this.reader();
     }
     reader(){
         this.empty();
-        this.add(this.mask);
         let textHeight = 0;
-        var start = (this.page - 1) * this.pageNum;
-        var end = start + this.pageNum;
-        var len = this.allText.length;
-        end = end < len ? end : len ;
-        for(var i = start;  i < end; i++){
+
+        for(var i = 0,len = this.allText.length;  i < len; i++){
             var text = this.allText[i];
             text.y = textHeight
             textHeight += this.lineHeight;

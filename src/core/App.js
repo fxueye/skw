@@ -14,7 +14,7 @@ class App{
 
     constructor(){
         this._tickId = null;
-        this._frame = 0;
+        // this._frame = 0;
         this._frameRate = 16;
         this._eventMgr = new EventMgr();
         this._init = false;
@@ -106,7 +106,7 @@ class App{
     }
 
     update(){
-        this._frame++;
+        // this._frame++;
         this._stage.update();
         this._viewMgr.update();
     }

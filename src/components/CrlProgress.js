@@ -5,7 +5,7 @@
 import Group from '../cax/render/display/group'
 import Graphics from '../cax/render/display/graphics'
 class CrlProgress extends Group{
-    constructor(options){
+    constructor(options={}){
         super();
         this._radius = options.radius || 55;
         this._startAngle = options.startAngle || 0;

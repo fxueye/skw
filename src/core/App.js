@@ -18,6 +18,7 @@ class App{
         this._frameRate = 16;
         this._eventMgr = new EventMgr();
         this._init = false;
+        this._isRuning = false;
     }
 
     on (type, listener,thisObject, useCapture) {
@@ -67,11 +68,16 @@ class App{
     get isInit(){
         return this._init;
     }
-    start(){
+    run(){
         this._tickId = setRafInterval(this.update.bind(this),this._frameRate);
+        this._isRuning = true;
     }
     stop(){
         clearRafInterval(this._tickId);
+        this._isRuning = false;
+    }
+    get isRuning(){
+        return this._isRuning;
     }
     get ViewMgr(){
         return this._viewMgr;

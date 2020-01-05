@@ -4,7 +4,7 @@
 */
 import Stage from '../cax/render/display/stage'
 import Group from '../cax/render/display/group'
-import {setRafInterval} from '../cax/common/raf-interval'
+import {setRafInterval,clearRafInterval} from '../cax/common/raf-interval'
 import ViewMgr from './ViewMgr';
 import Loader from './Loader';
 import EasyLoading from './EasyLoading';

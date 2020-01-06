@@ -37,8 +37,7 @@ class Text extends Group{
         this.empty();
         let textHeight = 0;
         const texts = this._text.split('\n');
-        var len = texts.length;
-        texts.forEach((t,idx)=>{ 
+        texts.forEach((t)=>{ 
             this._caxText = new CaxText(t,{
                 font: this.font,
                 color: this._color,

@@ -34,7 +34,7 @@ class Text extends Group{
     }
 
     refresh(){
-        
+        this.empty();
     
         let textHeight = 0;
         const texts = this._text.split('\n');
@@ -58,18 +58,18 @@ class Text extends Group{
                     if(this.textAlign == "center"){
                         this._caxText.x  = this.width / 2;
                     }
-                    // this._caxText.y =  textHeight + (index+1) * this.lineHeight;
-                    this.allText.push(this._caxText);
-                    // this.add(this._caxText);
+                    this._caxText.y =  textHeight + (index+1) * this.lineHeight;
+                    // this.allText.push(this._caxText);
+                    this.add(this._caxText);
                 })
                 textHeight += textList.length * this.lineHeight;
             }else{
-                // this._caxText.y = textHeight + this.lineHeight;
+                this._caxText.y = textHeight + this.lineHeight;
                 if(this.textAlign == "center"){
                     this._caxText.x  = this.width / 2;
                 }
-                this.allText.push(this._caxText);
-                // this.add(this._caxText);
+                // this.allText.push(this._caxText);
+                this.add(this._caxText);
                 textHeight += this.lineHeight;
             }
         })
@@ -78,19 +78,6 @@ class Text extends Group{
             this.height = textHeight;
         }
 
-       
-        this.reader();
-    }
-    reader(){
-        this.empty();
-        let textHeight = 0;
-
-        for(var i = 0,len = this.allText.length;  i < len; i++){
-            var text = this.allText[i];
-            text.y = textHeight
-            textHeight += this.lineHeight;
-            this.add(text);
-        }
     }
 
 

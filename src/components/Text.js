@@ -35,10 +35,10 @@ class Text extends Group{
 
     refresh(){
         this.empty();
-    
         let textHeight = 0;
         const texts = this._text.split('\n');
-        texts.forEach((t)=>{ 
+        var len = texts.length;
+        texts.forEach((t,idx)=>{ 
             this._caxText = new CaxText(t,{
                 font: this.font,
                 color: this._color,
@@ -58,17 +58,15 @@ class Text extends Group{
                     if(this.textAlign == "center"){
                         this._caxText.x  = this.width / 2;
                     }
-                    this._caxText.y =  textHeight + (index+1) * this.lineHeight;
-                    // this.allText.push(this._caxText);
+                    this._caxText.y =  textHeight + index * this.lineHeight;
                     this.add(this._caxText);
                 })
                 textHeight += textList.length * this.lineHeight;
             }else{
-                this._caxText.y = textHeight + this.lineHeight;
+                this._caxText.y = textHeight;
                 if(this.textAlign == "center"){
                     this._caxText.x  = this.width / 2;
                 }
-                // this.allText.push(this._caxText);
                 this.add(this._caxText);
                 textHeight += this.lineHeight;
             }

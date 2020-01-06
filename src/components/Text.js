@@ -19,8 +19,7 @@ class Text extends Group{
         });
         this.width = options.width || this._caxText.getWidth();
         this.height = options.height | 0;
-        
-        this.allText = []
+    
         this.refresh();
     }
   

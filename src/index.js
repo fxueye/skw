@@ -64,6 +64,7 @@ const skw = {
     ScrollView,
     CrlProgress,
     Banner,
+    CheckBox,
 
     //cax
     Stage,

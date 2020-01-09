@@ -13,6 +13,7 @@ class Text extends Group{
         this._color = options.color || "#FFFFFF";
         this.lineHeight = options.lineHeight || 12;
         this.textAlign = options.textAlign || "left";
+        this.baseline = options.baseline || "top";
         this._caxText = new CaxText(this._text,{
             font:this.font,
             color:this._color
@@ -40,7 +41,8 @@ class Text extends Group{
             this._caxText = new CaxText(t,{
                 font: this.font,
                 color: this._color,
-                textAlign:this.textAlign
+                textAlign:this.textAlign,
+                baseline:this.baseline
             })
             const textWidth = this._caxText.getWidth();
             
@@ -51,7 +53,8 @@ class Text extends Group{
                     this._caxText = new CaxText(text,{
                         font: this.font,
                         color: this._color,
-                        textAlign:this.textAlign
+                        textAlign:this.textAlign,
+                        baseline:this.baseline
                     })
                     if(this.textAlign == "center"){
                         this._caxText.x  = this.width / 2;

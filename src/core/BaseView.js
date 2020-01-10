@@ -39,6 +39,9 @@ class BaseView extends Group {
     update(){
         
     }
+    _update(dt){
+
+    }
     
     isShow(){
         return this.visible;

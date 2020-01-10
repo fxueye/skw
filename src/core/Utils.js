@@ -22,19 +22,23 @@ class Utils{
 			}
 			return str;
 	}
-	//解决手机端无法使用解析yyyy-MM-dd hh:mm:ss直接格式 new Date(dateString)  
-	static string2Date(dateString){
-		if(dateString){
-			try{
-				var arr = dateString.split(' ');
-				var ymd = arr[0].split('-');
-				var him = arr[1].split(':');
-				return new Date(ymd[0],ymd[1],ymd[2],him[0],him[1],him[2]);
-			}catch(e){
-				//TODO handle the exception
-			}
+	//不超过一小时
+	static secondFormat(second){
+		var minute = Math.floor(second / 60 );
+		var sec = second % 60;
+		return format("{0}:{1}",pad(minute,2),pad(sec,2)); 
+	}
+	static pad(num,n){
+		var len = num.toString().length;
+		while(len < n){
+			num = "0"+num;
+			len++;
 		}
-		return new Date(dateString);
+		return num;
+	}
+	static string2Date(dateString){
+		dateString.replace(/-/g,'/');
+		return Date.parse(dateString);
 	}
 	static isEmail(email){
 		var reg = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
@@ -91,6 +95,7 @@ class Utils{
 		var backingStore = ctx.backingStorePixelRatio ||ctx.webkitBackingStorePixelRatio ||ctx.mozBackingStorePixelRatio ||ctx.msBackingStorePixelRatio ||ctx.oBackingStorePixelRatio ||ctx.backingStorePixelRatio || 1;
 		return ((window.devicePixelRatio || 1) / backingStore);
 	}
+
 	static stringSplit (str, len,){
 		let arr = [],
 		offset = 0,
@@ -107,6 +112,40 @@ class Utils{
 		}
 		return arr
 	}
+	static isWeixin(){  
+		var ua = navigator.userAgent.toLowerCase();  
+		if(ua.match(/MicroMessenger/i)=="micromessenger") {  
+			return true;  
+		} else {  
+			return false;  
+		}  
+	}  
+	static ios() {
+		return /(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent);
+	}
+	static android(){
+		return /(Android)/i.test(navigator.userAgent)
+	}
+	//权重随机
+	static randomW(weights){
+		var sum = 0;
+		var index = 0;
+		for(var i = 0,len = weights.length; i < len; i++){
+			sum += weights[i];
+		}
+		for(var i = 0,len = weights.length; i < len; i++){
+			var rand = Math.floor(Math.random() * sum + 1);
+			if(weights[i] >= rand){
+				index = i;
+				break;
+			}else{
+				sum -= weights[i];
+			}
+
+		}
+		return index;
+	}
+	
 }
 
 

@@ -14,7 +14,8 @@ class App{
 
     constructor(){
         this._tickId = null;
-        // this._frame = 0;
+        this._last = new Date().getTime();
+        this._accumulator = 0;
         this._frameRate = 16;
         this._eventMgr = new EventMgr();
         this._init = false;
@@ -112,9 +113,20 @@ class App{
     }
 
     update(){
-        // this._frame++;
+        this._update();
         this._stage.update();
         this._viewMgr.update();
+    }
+    // Time-based Animation Improved
+    _update(){
+        var now = new Date().getTime();
+        var passed = now - this._last;
+        this._last = now;
+        this._accumulator += passed;
+        while(this._accumulator >= this._frameRate){
+            this._viewMgr._update(this._frameRate);
+            this._accumulator -= this._frameRate;
+        }
     }
     
     reSize(){

@@ -101,5 +101,15 @@ class ViewMgr{
                 
         }
     }
+    _update(dt){
+        for(var i = this._opens.length - 1 ; i >= 0; i-- ){
+            var key = this._opens[i];
+            var view = this.getView(key);
+            if(view){
+                view._update(dt)
+            }
+                
+        }
+    }
 }
 export default ViewMgr

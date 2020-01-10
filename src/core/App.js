@@ -124,8 +124,10 @@ class App{
         this._last = now;
         this._accumulator += passed;
         while(this._accumulator >= this._frameRate){
+
             this._viewMgr._update(this._frameRate);
             this._accumulator -= this._frameRate;
+            
         }
     }
     

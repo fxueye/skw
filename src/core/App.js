@@ -15,6 +15,7 @@ class App{
     constructor(){
         this._tickId = null;
         this._last = new Date().getTime();
+        this._dt = 1000 / 60;
         this._accumulator = 0;
         this._frameRate = 16;
         this._eventMgr = new EventMgr();
@@ -123,11 +124,11 @@ class App{
         var passed = now - this._last;
         this._last = now;
         this._accumulator += passed;
-        while(this._accumulator >= this._frameRate){
+        while(this._accumulator >= this._dt){
 
-            this._viewMgr._update(this._frameRate);
-            this._accumulator -= this._frameRate;
-            
+            this._viewMgr._update(this._dt);
+            this._accumulator -= this._dt;
+
         }
     }
     

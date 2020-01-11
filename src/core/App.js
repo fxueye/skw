@@ -1,5 +1,5 @@
 /**
-*Created on 2019?8?20?
+*Created on 2019年8月20日
 *@author: skw QQ:281431280 
 */
 import Stage from '../cax/render/display/stage'
@@ -17,7 +17,8 @@ class App{
         this._last = new Date().getTime();
         this._dt = 1000 / 60;
         this._accumulator = 0;
-        this._frameRate = 16;
+        this._frame = 60;
+        this._frameRate = 1000 / this._frame;
         this._eventMgr = new EventMgr();
         this._init = false;
         this._isRuning = false;
@@ -35,10 +36,11 @@ class App{
         this._eventMgr.dispatchEvent(evt);
     }
  
-    init(width,height,renderTo,frameRate = 16){
+    init(width,height,renderTo,frame = 60){
         this.width = width;
         this.height = height;
-        this._frameRate = frameRate;
+        this._frame = frame;
+        this._frameRate = 1000 / this._frame;
         this._stage = new Stage(width,height,renderTo);
         this._gameStage = new Group();
         this._uiStage = new Group();
@@ -130,6 +132,7 @@ class App{
             this._accumulator -= this._dt;
 
         }
+
     }
     
     reSize(){

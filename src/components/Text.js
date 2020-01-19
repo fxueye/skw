@@ -72,11 +72,8 @@ class Text extends Group{
                 textHeight += this.lineHeight;
             }
         })
- 
-        if(this.height == 0){
-            this.height = textHeight;
-        }
-
+        
+        this.height = textHeight;
     }
 
 

@@ -115,7 +115,16 @@ class Utils{
 		return ((window.devicePixelRatio || 1) / backingStore);
 	}
 
-	static stringSplit (str, len,){
+	static stringLength(str){
+		var  char_length = 0
+		for (let i = 0; i < str.length; i++) {
+			let son_str = str.charAt(i)
+			encodeURI(son_str).length > 2 ? char_length += 1 : char_length += 0.5
+		}
+		return char_length;
+	}
+
+	static stringSplit (str, len){
 		let arr = [],
 		offset = 0,
 		char_length = 0
@@ -125,7 +134,7 @@ class Utils{
 		if (char_length >= len || (char_length < len && i === str.length - 1)) {
 			let sub_len = char_length == len ? i + 1 : i
 			arr.push(str.substr(offset, sub_len - offset + ((char_length < len && i === str.length - 1) ? 1 : 0)))
-			offset = i + 1
+			offset = i 
 			char_length = 0
 		}
 		}

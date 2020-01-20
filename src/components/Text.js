@@ -47,7 +47,7 @@ class Text extends Group{
             const textWidth = this._caxText.getWidth();
             
             if(textWidth > this.width){
-                const step = Math.round( t.length * this.width / textWidth );
+                const step = Math.round( Utils.stringLength(t) * this.width / textWidth );
                 const textList = Utils.stringSplit(t,step);
                 textList.forEach((text,index)=>{
                     this._caxText = new CaxText(text,{

@@ -45,7 +45,7 @@ class Loader{
 
     loading(){
         
-        self = this;
+        const self = this;
         if(this._resBasePath){
             for(var key in this._imgsTemp){
                 this._imgsTemp[key] = this._resBasePath+'/'+this._imgsTemp[key];
@@ -78,7 +78,7 @@ class Loader{
     }
     _loading(){
         
-        self = this;
+        const self = this;
         if(this._resBasePath){
             for(var key in this._imgsTemp){
                 this._imgsTemp[key] = this._resBasePath+'/'+this._imgsTemp[key];
